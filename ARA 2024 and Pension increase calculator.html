@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay and Pension Increase Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-family: 'Impact', sans-serif;
+            color: red;
+            font-weight: bold;
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+
+        .author {
+            font-family: 'Times New Roman', serif;
+            color: #0000ff;
+            font-style: italic;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .output {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .output h3 {
+            margin-bottom: 5px;
+        }
+
+        .output p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+    <script>
+        function calculatePayIncrease() {
+            let basicPay = parseFloat(document.getElementById('basicPay').value);
+            let bps = parseInt(document.getElementById('bps').value);
+            let increasedAmount;
+
+            if (bps >= 1 && bps <= 16) {
+                increasedAmount = basicPay * 0.25;
+            } else if (bps >= 17 && bps <= 22) {
+                increasedAmount = basicPay * 0.20;
+            } else {
+                increasedAmount = 'Invalid BPS';
+            }
+
+            document.getElementById('adhocReliefAllowance').innerText = isNaN(increasedAmount) ? 'Invalid input' : increasedAmount.toFixed(2);
+        }
+
+        function calculatePensionIncrease() {
+            let pension = parseFloat(document.getElementById('pension').value);
+            let increasedPension = pension * 0.15;
+
+            document.getElementById('increasedPension').innerText = isNaN(increasedPension) ? 'Invalid input' : increasedPension.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+    <div class="title">esedikhan.blogspot.com</div>
+    <div class="author">made by Noman Muhammad</div>
+    <div class="container">
+        <h1>Pay and Pension Increase Calculator</h1>
+        
+        <div>
+            <label for="basicPay">Basic Pay:</label>
+            <input type="number" id="basicPay" step="0.01" placeholder="Enter Basic Pay">
+        </div>
+        <div>
+            <label for="bps">BPS:</label>
+            <input type="number" id="bps" min="1" max="22" placeholder="Enter BPS">
+        </div>
+        <div>
+            <button onclick="calculatePayIncrease()">Calculate Pay Increase</button>
+        </div>
+        <div class="output">
+            <h3>Adhoc Relief Allowance 2024:</h3>
+            <p id="adhocReliefAllowance"></p>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <label for="pension">Pension:</label>
+            <input type="number" id="pension" step="0.01" placeholder="Enter Pension Amount">
+        </div>
+        <div>
+            <button onclick="calculatePensionIncrease()">Calculate Pension Increase</button>
+        </div>
+        <div class="output">
+            <h3>Increased Pension:</h3>
+            <p id="increasedPension"></p>
+        </div>
+    </div>
+</body>
+</html>
