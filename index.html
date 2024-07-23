@@ -107,19 +107,26 @@
             let annualIncome = monthlyIncome * 12;
             let monthlyTax, annualTax;
             let monthlyIncomeAfterTax, annualIncomeAfterTax;
+            let fixedAmount;
 
             if (annualIncome <= 600000) {
                 annualTax = 0;
+                fixedAmount = 0;
             } else if (annualIncome <= 1200000) {
                 annualTax = (annualIncome - 600000) * 0.05;
+                fixedAmount = 0;
             } else if (annualIncome <= 2200000) {
                 annualTax = 30000 + (annualIncome - 1200000) * 0.15;
+                fixedAmount = 30000;
             } else if (annualIncome <= 3200000) {
                 annualTax = 180000 + (annualIncome - 2200000) * 0.25;
+                fixedAmount = 180000;
             } else if (annualIncome <= 4100000) {
                 annualTax = 430000 + (annualIncome - 3200000) * 0.30;
+                fixedAmount = 430000;
             } else {
                 annualTax = 700000 + (annualIncome - 4100000) * 0.35;
+                fixedAmount = 700000;
             }
 
             monthlyTax = annualTax / 12;
@@ -132,6 +139,8 @@
             document.getElementById('annualIncome').innerText = isNaN(annualIncome) ? 'Invalid input' : annualIncome.toFixed(2);
             document.getElementById('annualTax').innerText = isNaN(annualTax) ? 'Invalid input' : annualTax.toFixed(2);
             document.getElementById('annualIncomeAfterTax').innerText = isNaN(annualIncomeAfterTax) ? 'Invalid input' : annualIncomeAfterTax.toFixed(2);
+            document.getElementById('fixedAmount').innerText = isNaN(fixedAmount) ? 'Invalid input' : fixedAmount.toFixed(2);
+            document.getElementById('totalTaxWithFixed').innerText = isNaN(annualTax + fixedAmount) ? 'Invalid input' : (annualTax + fixedAmount).toFixed(2);
         }
     </script>
 </head>
@@ -178,6 +187,14 @@
                 <tr>
                     <td>Yearly Income After Tax</td>
                     <td id="annualIncomeAfterTax"></td>
+                </tr>
+                <tr>
+                    <td>Fixed Amount Tax Deduction</td>
+                    <td id="fixedAmount"></td>
+                </tr>
+                <tr>
+                    <td>Total Tax (Annual + Fixed)</td>
+                    <td id="totalTaxWithFixed"></td>
                 </tr>
             </table>
         </div>
